@@ -129,8 +129,8 @@ setpath_json "product" "tunnelApplicationConfig" '{}'
 # Open VSX on the first start, as published by Anthropic.
 setpath_json "product" "builtInExtensions" "$( jq -c '. + [{
   "name": "moopi.moopi-desktop",
-  "version": "0.3.0",
-  "sha256": "edb4c28bbc12b724b399080fc503c47c89ad1791a73771a895ad263dba7a0ab6",
+  "version": "0.4.0",
+  "sha256": "557a03595843733847aa168e6ff72ce0ce1eb610e0ba3827f1ddd92adbeb5a10",
   "repo": "https://github.com/mnekboyev99-1/moopi-desktop",
   "metadata": {
     "id": "b7c0a4b2-5d7e-4f3a-9c1e-2a6d8e4f1b00",
