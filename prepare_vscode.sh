@@ -51,12 +51,12 @@ setpath "product" "tipsAndTricksUrl" "https://go.microsoft.com/fwlink/?linkid=85
 setpath "product" "twitterUrl" "https://go.microsoft.com/fwlink/?LinkID=533687"
 
 if [[ "${DISABLE_UPDATE}" != "yes" ]]; then
-  setpath "product" "updateUrl" "https://raw.githubusercontent.com/VSCodium/versions/refs/heads/master"
+  setpath "product" "updateUrl" "https://raw.githubusercontent.com/mnekboyev99-1/moopi-desktop-build/refs/heads/master"
 
   if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
     setpath "product" "downloadUrl" "https://github.com/VSCodium/vscodium-insiders/releases"
   else
-    setpath "product" "downloadUrl" "https://github.com/VSCodium/vscodium/releases"
+    setpath "product" "downloadUrl" "https://github.com/mnekboyev99-1/moopi-desktop-build/releases"
   fi
 fi
 
@@ -123,6 +123,21 @@ else
 fi
 
 setpath_json "product" "tunnelApplicationConfig" '{}'
+
+# MOOPI's own extension ships inside the build (downloaded from its GitHub release at build time, like
+# VS Code's other built-in extensions). Claude Code is NOT bundled: the MOOPI extension installs it from
+# Open VSX on the first start, as published by Anthropic.
+setpath_json "product" "builtInExtensions" "$( jq -c '. + [{
+  "name": "moopi.moopi-desktop",
+  "version": "0.1.0",
+  "sha256": "c520d26e3a41c8ffa28f72cf3779a43970bf7abe9be27dc0b7a6d8b14764bf6d",
+  "repo": "https://github.com/mnekboyev99-1/moopi-desktop",
+  "metadata": {
+    "id": "b7c0a4b2-5d7e-4f3a-9c1e-2a6d8e4f1b00",
+    "publisherId": { "publisherId": "2edbed00-3642-4e24-8d7d-e56e5f69306e", "publisherName": "moopi", "displayName": "MOOPI", "flags": "verified" },
+    "publisherDisplayName": "MOOPI"
+  }
+}]' <<< "$( jq -c '.builtInExtensions // []' product.json )" )"
 
 jsonTmp=$( jq -s '.[0] * .[1]' product.json ../product.json )
 echo "${jsonTmp}" > product.json && unset jsonTmp

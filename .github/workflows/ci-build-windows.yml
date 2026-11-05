@@ -15,6 +15,8 @@ on:
       - insider
     paths-ignore:
       - "**/*.md"
+      - "stable/**"
+      - "insider/**"
   pull_request:
     branches:
       - "**"

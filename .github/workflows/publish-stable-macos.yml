@@ -15,7 +15,7 @@ env:
   MAX_OLD_SPACE_SIZE: 12288
   ORG_NAME: ${{ github.repository_owner }}
   OS_NAME: osx
-  VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
+  VERSIONS_REPOSITORY: ${{ github.repository }}
   VSCODE_QUALITY: stable
 
 jobs:
@@ -84,7 +84,7 @@ jobs:
 
       - name: Update versions repo
         env:
-          GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
         run: ./update_version.sh
         if: env.SHOULD_BUILD == 'yes'

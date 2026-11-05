@@ -14,7 +14,7 @@ env:
   GITHUB_BRANCH: master
   ORG_NAME: ${{ github.repository_owner }}
   OS_NAME: windows
-  VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
+  VERSIONS_REPOSITORY: ${{ github.repository }}
   VSCODE_QUALITY: stable
 
 jobs:
@@ -200,7 +200,9 @@ jobs:
           # 8h to manually approve the request
           wait-for-completion-timeout-in-seconds: 28800
           output-artifact-directory: assets/
-        if: env.SHOULD_BUILD == 'yes'
+        if: env.SHOULD_BUILD == 'yes' && env.SIGNPATH_API_TOKEN != ''
+        env:
+          SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
 
       - name: Prepare checksums
         run: ./prepare_checksums.sh
@@ -214,13 +216,14 @@ jobs:
 
       - name: Update versions repo
         env:
-          GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
         run: ./update_version.sh
         if: env.SHOULD_BUILD == 'yes'
 
   winget:
     needs: build
+    if: false  # package registries are not used by the MOOPI fork
     runs-on: windows-2022
     environment: publish
     permissions:
