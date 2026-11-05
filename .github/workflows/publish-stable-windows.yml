@@ -1,7 +1,12 @@
 name: Publish - Stable - Windows
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      electron_mirror:
+        type: string
+        description: "Electron download mirror when GitHub's releases answer 504 (e.g. https://npmmirror.com/mirrors/electron/); empty = GitHub"
+        default: ""
   repository_dispatch:
     types:
       - publish-stable
@@ -86,6 +91,7 @@ jobs:
         env:
           SHOULD_BUILD_REH: no
           SHOULD_BUILD_REH_WEB: no
+          ELECTRON_MIRROR: ${{ github.event.inputs.electron_mirror }}
         run: ./build.sh
         if: env.SHOULD_BUILD == 'yes'
 
