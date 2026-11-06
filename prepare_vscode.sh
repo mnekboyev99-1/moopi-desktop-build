@@ -125,15 +125,17 @@ fi
 setpath_json "product" "tunnelApplicationConfig" '{}'
 
 # MOOPI's own extension ships inside the build (downloaded from its GitHub release at build time, like
-# VS Code's other built-in extensions). Claude Code is NOT bundled: the MOOPI extension installs it from
+# VS Code's other built-in extensions). Only the small bootstrap is built in: VS Code never updates a built-in
+# extension, so the real MOOPI extension is installed by the bootstrap as an ordinary one on the first start and
+# updates itself from GitHub after that. Claude Code is NOT bundled: the MOOPI extension installs it from
 # Open VSX on the first start, as published by Anthropic.
 setpath_json "product" "builtInExtensions" "$( jq -c '. + [{
-  "name": "moopi.moopi-desktop",
-  "version": "0.9.1",
-  "sha256": "be1984e7103239e349bfd719a258c98c47d81c82b7e2aa89786e3f79f62e2e28",
+  "name": "moopi.moopi-bootstrap",
+  "version": "0.0.1",
+  "sha256": "01955918ad2f4cba474b57ae3a5c83e580c792dd44501f6f826e7cd5e3e0cef6",
   "repo": "https://github.com/mnekboyev99-1/moopi-desktop",
   "metadata": {
-    "id": "b7c0a4b2-5d7e-4f3a-9c1e-2a6d8e4f1b00",
+    "id": "c4d1e7a9-3b2f-4e8d-a5c6-7f9b1d2e3a44",
     "publisherId": { "publisherId": "2edbed00-3642-4e24-8d7d-e56e5f69306e", "publisherName": "moopi", "displayName": "MOOPI", "flags": "verified" },
     "publisherDisplayName": "MOOPI"
   }
