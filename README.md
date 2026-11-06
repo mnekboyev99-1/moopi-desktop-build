@@ -24,6 +24,17 @@ integratsiyalari MOOPI serverida ishlaydi va bu yerda emas.
 
 O'rnatilgan dastur o'zini yangilab turadi.
 
+## Code signing policy
+
+Free code signing on Windows is provided by [SignPath.io](https://signpath.io), certificate by the
+[SignPath Foundation](https://signpath.org).
+
+- Committers and reviewers: Muxiddin Nekbayev ([@mnekboyev99-1](https://github.com/mnekboyev99-1))
+- Approvers: Muxiddin Nekbayev ([@mnekboyev99-1](https://github.com/mnekboyev99-1))
+- Privacy policy: this program will not transfer any information to other networked systems unless
+  specifically requested by the user or the person installing or operating it. MOOPI's own services are used
+  only after the user signs in: https://moopi.uz/privacy/
+
 ## Texnik asos
 
 MOOPI Desktop [VSCodium](https://github.com/VSCodium/vscodium) (Microsoft'ning ochiq kodli
